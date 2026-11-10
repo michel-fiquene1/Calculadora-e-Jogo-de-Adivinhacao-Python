@@ -9,3 +9,12 @@ venv/
 .idea/
 Thumbs.db
 .DS_Store
+.playwright-cli/
+output/playwright/
+node_modules/
+.cache/
+.pytest_cache/
+coverage/
+.coverage
+*.log
+*.tmp

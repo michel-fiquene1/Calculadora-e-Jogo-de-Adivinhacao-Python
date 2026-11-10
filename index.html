@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="theme-color" content="#0c0d12">
+  <meta name="description" content="Do terminal para o navegador: experimente uma calculadora e um jogo de adivinhação criados por Michel Fiquene.">
+  <title>Calculadora e Jogo de Adivinhação</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+  <script type="module" src="./assets/js/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="skip">Pular para o conteúdo</a>
+  <svg class="svg-library" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="icon-calc" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M8 6h8M8 11h1m6 0h1M8 15h1m6 0h1M8 19h1m6 0h1"/></symbol>
+    <symbol id="icon-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="icon-code" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5m8-10 5 5-5 5M14 4l-4 16"/></symbol>
+    <symbol id="icon-reset" viewBox="0 0 24 24"><path d="M4 10a8 8 0 1 1 1 7M4 4v6h6"/></symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="icon-window" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="17" rx="3"/><path d="M2 8h20M6 6h.1M9 6h.1"/></symbol>
+  </svg>
+
+  <header class="header">
+    <div class="header-inner">
+      <a class="brand" href="#inicio" aria-label="Duo Lab — Início" data-i18n-aria-label="brandLabel"><span class="brand-mark" aria-hidden="true">d<span>:</span></span><span>duo<span class="muted">lab</span><span class="brand-dot">.</span></span></a>
+      <nav class="nav" aria-label="Navegação principal" data-i18n-aria-label="navigation">
+        <a href="#inicio" data-route="inicio" data-i18n="navHome" aria-current="page">Início</a>
+        <a href="#calculadora" data-route="calculadora" data-i18n="navCalc">Calculadora</a>
+        <a href="#adivinhacao" data-route="adivinhacao" data-i18n="navGame">Adivinhação</a>
+      </nav>
+      <div class="languages" role="group" aria-label="Idioma" data-i18n-aria-label="language">
+        <button type="button" data-language="pt-BR" aria-pressed="true" lang="pt-BR">PT-BR</button>
+        <span aria-hidden="true">/</span>
+        <button type="button" data-language="en" aria-pressed="false" lang="en">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section id="inicio" class="page home" aria-labelledby="home-title">
+      <div class="hero experience-hero">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="status-dot"></span><span data-i18n="heroEyebrow">DUAS EXPERIÊNCIAS. UM SÓ LUGAR.</span></p>
+          <h1 id="home-title" tabindex="-1"><span data-i18n="heroTitle">Calculadora</span><span class="hero-accent" data-i18n="heroAccent">e Jogo de Adivinhação</span></h1>
+          <p class="hero-description" data-i18n="heroDescription">Precisão para calcular. Intuição para descobrir. Escolha sua experiência e coloque a lógica em movimento.</p>
+          <div class="hero-actions"><a class="button primary" href="#calculadora"><span data-i18n="heroAction">Abrir calculadora</span><svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></a><a class="subtle-link" href="#adivinhacao"><span data-i18n="heroOther">Jogar adivinhação</span><span aria-hidden="true">&#8599;</span></a></div>
+          <div class="hero-footnote"><span class="hero-footnote-mark" aria-hidden="true">&#8599;</span><span data-i18n="heroFootnote">Feito para explorar, não só observar.</span></div>
+        </div>
+        <div class="experience-scene" data-experience="calc">
+          <div class="scene-atmosphere" aria-hidden="true"><div class="scene-halo"></div><div class="scene-orbit orbit-a"></div><div class="scene-orbit orbit-b"></div><span class="scene-symbol symbol-plus">+</span><span class="scene-symbol symbol-times">&times;</span><span class="scene-symbol symbol-question">?</span><div class="scene-floor"></div></div>
+          <div class="scene-content">
+            <div class="scene-heading"><span class="scene-live-dot" aria-hidden="true"></span><span data-i18n="previewEyebrow">NÃO É SÓ UMA PRÉVIA. EXPERIMENTE.</span></div>
+            <div class="preview-tabs" role="tablist" data-i18n-aria-label="previewTabs" aria-label="Explorar os projetos">
+              <button id="preview-tab-calc" role="tab" type="button" aria-selected="true" aria-controls="preview-calc" data-preview="calc"><svg class="icon" aria-hidden="true"><use href="#icon-calc"/></svg><span data-i18n="navCalc">Calculadora</span></button>
+              <button id="preview-tab-game" role="tab" type="button" aria-selected="false" aria-controls="preview-game" tabindex="-1" data-preview="game"><svg class="icon" aria-hidden="true"><use href="#icon-target"/></svg><span data-i18n="navGame">Adivinhação</span></button>
+            </div>
+            <div class="preview-frame">
+              <div id="preview-calc" role="tabpanel" aria-labelledby="preview-tab-calc" class="preview-panel">
+                <div class="preview-label"><span data-i18n="previewCalcLabel">UM TOQUE. OUTRO RESULTADO.</span><span aria-hidden="true">01</span></div>
+                <div class="preview-readout" role="status" aria-live="polite" aria-atomic="true"><span id="preview-equation">24 × 8</span><output id="preview-result">192</output></div>
+                <div class="preview-operations" role="group" data-i18n-aria-label="operation" aria-label="Escolha a operação">
+                  <button type="button" data-demo-operation="add" aria-pressed="false" data-i18n-aria-label="add" aria-label="Somar">+</button><button type="button" data-demo-operation="subtract" aria-pressed="false" data-i18n-aria-label="subtract" aria-label="Subtrair">−</button><button type="button" data-demo-operation="multiply" aria-pressed="true" data-i18n-aria-label="multiply" aria-label="Multiplicar">×</button><button type="button" data-demo-operation="divide" aria-pressed="false" data-i18n-aria-label="divide" aria-label="Dividir">÷</button>
+                </div>
+                <p class="preview-instruction" data-i18n="previewCalcHint">Troque a operação. O resultado é de verdade.</p>
+                <a class="preview-launch" href="#calculadora"><span data-i18n="previewCalcLaunch">Sua vez: use seus números</span><svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
+              </div>
+              <div id="preview-game" role="tabpanel" aria-labelledby="preview-tab-game" class="preview-panel" hidden>
+                <div class="preview-label"><span data-i18n="previewGameLabel">QUANTO MAIOR, MAIS DESAFIADOR.</span><span aria-hidden="true">02</span></div>
+                <div class="preview-mystery" aria-hidden="true"><div></div><span>?</span></div>
+                <p id="preview-range" class="preview-range" role="status" aria-live="polite">Intervalo de 1 a 100</p>
+                <div class="preview-levels" role="group" data-i18n-aria-label="chooseDifficulty" aria-label="Qual é o seu desafio?"><button type="button" data-demo-limit="100" aria-pressed="true" data-i18n="easy">Fácil</button><button type="button" data-demo-limit="500" aria-pressed="false" data-i18n="medium">Médio</button><button type="button" data-demo-limit="1000" aria-pressed="false" data-i18n="hard">Difícil</button></div>
+                <p class="preview-instruction" data-i18n="previewGameHint">Explore os intervalos. Sempre 10 tentativas.</p>
+                <a class="preview-launch" href="#adivinhacao"><span data-i18n="previewGameLaunch">Entre no jogo</span><svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
+              </div>
+            </div>
+            <button class="effects-control" id="effects-toggle" type="button" aria-pressed="false"><span id="effects-symbol" aria-hidden="true">&#8545;</span><span id="effects-label">Pausar efeitos</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="section-heading projects-heading"><div><p class="eyebrow" data-i18n="experiencesEyebrow">ESCOLHA SUA EXPERIÊNCIA</p><h2 data-i18n="experiencesTitle">Um pouco de lógica. Muito para explorar.</h2></div><span class="section-index">01 — 02</span></div>
+      <div class="project-grid">
+        <article class="project-card calc-card" data-spotlight><div class="project-card-content"><div class="card-top"><span class="project-number">01</span><span class="tag" data-i18n="calcTag">LÓGICA &amp; PRECISÃO</span></div><h3 data-i18n="navCalc">Calculadora</h3><p data-i18n="calcDescription">Dois números ou um teclado completo. Você escolhe como chegar ao resultado.</p><span class="feature-line" data-i18n="calcFeature">02 MODOS · 04 OPERAÇÕES</span><a class="card-link" href="#calculadora"><span data-i18n="openCalc">Abrir calculadora</span><svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></a></div><div class="calc-card-art" aria-hidden="true"><div class="art-device"><span>10 + 5</span><strong>15</strong><div class="art-key-grid"><i>7</i><i>8</i><i>9</i><i>÷</i><i>4</i><i>5</i><i>6</i><i>×</i><i>1</i><i>2</i><i>3</i><i>−</i><i>0</i><i>.</i><i>=</i><i>+</i></div></div></div></article>
+        <article class="project-card game-card" data-spotlight><div class="project-card-content"><div class="card-top"><span class="project-number">02</span><span class="tag" data-i18n="gameTag">INTUIÇÃO &amp; ESTRATÉGIA</span></div><h3 data-i18n="navGame">Adivinhação</h3><p data-i18n="gameDescription">Um número escondido, dez chances e uma pista a cada palpite. Qual é a sua estratégia?</p><span class="feature-line" data-i18n="gameFeature">03 DIFICULDADES · 10 TENTATIVAS</span><a class="card-link" href="#adivinhacao"><span data-i18n="openGame">Começar o desafio</span><svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></a></div><div class="game-card-art" aria-hidden="true"><div class="radar-rings"><span>?</span><i class="radar-point"></i><i class="radar-point second"></i></div><span class="radar-number n-one">01</span><span class="radar-number n-two">100</span><span class="radar-pill">↑ <span data-i18n="artHint">Mais perto.</span></span></div></article>
+      </div>
+      <section class="transformation" aria-labelledby="transformation-title"><div class="transformation-visual" aria-hidden="true"><div class="code-file"><div class="file-tab"><svg class="icon"><use href="#icon-code"/></svg><span>calculadora.py</span><span>PY</span></div><pre><span class="line-number">01</span> <span class="code-purple">n1</span> = <span class="code-gold">float</span>(input())
+<span class="line-number">02</span> <span class="code-purple">n2</span> = <span class="code-gold">float</span>(input())
+<span class="line-number">03</span> <span class="code-gold">print</span>(n1 + n2)
+<span class="line-number">04</span> <span class="code-mint"># 15.0</span></pre><span class="code-caption" data-i18n="terminalVersion">VERSÃO DE TERMINAL</span></div><div class="bridge-arrow"><svg class="icon"><use href="#icon-arrow"/></svg><span>JS</span></div><div class="web-file"><div class="file-tab"><svg class="icon"><use href="#icon-window"/></svg><span data-i18n="webVersion">NO NAVEGADOR</span></div><div class="web-sum"><span>10</span><b>+</b><span>5</span></div><div class="web-result"><span data-i18n="result">RESULTADO</span><strong>15</strong><svg class="icon"><use href="#icon-arrow"/></svg></div></div></div><div class="transformation-copy"><p class="eyebrow"><span class="status-dot"></span><span data-i18n="journeyEyebrow">MESMA ESSÊNCIA. OUTRA DIMENSÃO.</span></p><h2 id="transformation-title" data-i18n="journeyTitle">Do terminal para uma experiência interativa.</h2><p data-i18n="journeyText">Tudo começou com programas Python, comandos e entradas de texto. A lógica foi adaptada para JavaScript e ganhou interfaces visuais para você experimentar direto no navegador, sem instalar nada.</p><div class="preserved-note"><svg class="icon" aria-hidden="true"><use href="#icon-code"/></svg><span data-i18n="pythonPreserved">Os arquivos Python originais estão preservados no repositório. Aqui, quem executa a lógica é o JavaScript.</span></div></div></section>
+      <section class="project-stories" aria-labelledby="stories-title"><div class="section-heading"><div><p class="eyebrow" data-i18n="storiesEyebrow">POR TRÁS DA EXPERIÊNCIA</p><h2 id="stories-title" data-i18n="storiesTitle">Conheça os projetos.</h2></div><svg class="icon" aria-hidden="true"><use href="#icon-code"/></svg></div><div class="stories-grid"><article class="story"><span class="story-icon"><svg class="icon" aria-hidden="true"><use href="#icon-calc"/></svg></span><div><h3 data-i18n="navCalc">Calculadora</h3><p data-i18n="calcStory">Criada em Python para explorar operações matemáticas e validação de entradas. Na web, evoluiu para dois modos: cálculo entre dois números e uma calculadora digital tradicional.</p><a class="subtle-link" href="#calculadora"><span data-i18n="tryProject">Experimentar projeto</span><span aria-hidden="true">↗</span></a></div></article><article class="story game-story"><span class="story-icon"><svg class="icon" aria-hidden="true"><use href="#icon-target"/></svg></span><div><h3 data-i18n="navGame">Adivinhação</h3><p data-i18n="gameStory">Um desafio de lógica que nasceu no terminal Python. A versão web mantém as regras e dá vida às pistas, à escolha de dificuldade e ao acompanhamento de cada tentativa.</p><a class="subtle-link" href="#adivinhacao"><span data-i18n="tryProject">Experimentar projeto</span><span aria-hidden="true">↗</span></a></div></article></div></section>
+    </section>
+
+    <section id="calculadora" class="page workspace calc-workspace" aria-labelledby="calc-title" hidden>
+      <div class="workspace-intro">
+        <a class="back-link" href="#inicio"><span aria-hidden="true">←</span><span data-i18n="backHome">Voltar ao início</span></a>
+        <p class="eyebrow"><span class="project-number">01 /</span><span data-i18n="calcTag">LÓGICA &amp; PRECISÃO</span></p>
+        <h1 id="calc-title" tabindex="-1" data-i18n="navCalc">Calculadora</h1>
+        <p class="intro-description" data-i18n="calcIntro">Um resultado. Dois caminhos.<br>Encontre o seu ritmo.</p>
+        <div class="guide-example"><span data-i18n="exampleLabel">TRADICIONAL · SEQUENCIAL</span><div><span>10 + 5 × 2</span><strong>= 30</strong></div></div>
+        <details class="instructions" open><summary class="small-heading" data-i18n="howItWorks">VOCÊ ESCOLHE COMO CALCULAR</summary><ol><li data-i18n="calcStep1">Dois números: preencha e escolha a operação.</li><li data-i18n="calcStep2">Tradicional: use os botões ou o teclado.</li><li data-i18n="calcStep3">Troque de modo sem perder sua conta.</li></ol></details>
+        <p class="quiet-note" data-i18n="calcNote">Números negativos e decimais são bem-vindos.</p>
+      </div>
+      <div class="calculator-shell">
+        <div class="mode-switch" role="tablist" data-i18n-aria-label="calculatorModes" aria-label="Modos da calculadora"><button id="mode-two" type="button" role="tab" aria-selected="true" aria-controls="two-number-panel" data-calc-mode="two" data-i18n="modeTwo">Dois números</button><button id="mode-classic" type="button" role="tab" aria-selected="false" aria-controls="traditional-panel" tabindex="-1" data-calc-mode="classic" data-i18n="modeClassic">Calculadora tradicional</button></div>
+      <div id="two-number-panel" class="instrument calculator" role="tabpanel" aria-labelledby="mode-two">
+        <div class="instrument-top"><span class="instrument-name"><svg class="icon"><use href="#icon-calc"/></svg><span data-i18n="calcInstrument">CALCULADORA DIGITAL</span></span><span class="indicator" aria-hidden="true"></span></div>
+        <div class="result-screen" role="status" aria-live="polite" aria-atomic="true"><span class="screen-label" data-i18n="result">RESULTADO</span><span id="calc-expression" class="expression"></span><output id="calc-result" class="result-number">0</output><span id="calc-status" class="screen-caption"></span></div>
+        <form id="calc-form" novalidate>
+          <div class="number-fields">
+            <div class="field"><label for="first-number" data-i18n="firstNumber">Primeiro número</label><input id="first-number" name="first" type="text" inputmode="decimal" placeholder="0" autocomplete="off" maxlength="100" aria-describedby="first-error"><span class="field-error" id="first-error"></span></div>
+            <span id="operation-preview" class="between-sign" aria-hidden="true">+</span>
+            <div class="field"><label for="second-number" data-i18n="secondNumber">Segundo número</label><input id="second-number" name="second" type="text" inputmode="decimal" placeholder="0" autocomplete="off" maxlength="100" aria-describedby="second-error"><span class="field-error" id="second-error"></span></div>
+          </div>
+          <fieldset class="operation-fieldset"><legend data-i18n="operation">Escolha a operação</legend><div class="operations">
+            <label class="operation-option"><input type="radio" name="operation" value="add" checked><span><b aria-hidden="true">+</b><small data-i18n="add">Somar</small></span></label>
+            <label class="operation-option"><input type="radio" name="operation" value="subtract"><span><b aria-hidden="true">−</b><small data-i18n="subtract">Subtrair</small></span></label>
+            <label class="operation-option"><input type="radio" name="operation" value="multiply"><span><b aria-hidden="true">×</b><small data-i18n="multiply">Multiplicar</small></span></label>
+            <label class="operation-option"><input type="radio" name="operation" value="divide"><span><b aria-hidden="true">÷</b><small data-i18n="divide">Dividir</small></span></label>
+          </div></fieldset>
+          <button class="button primary calculate-button" type="submit"><span data-i18n="calculate">Calcular resultado</span><span aria-hidden="true">=</span></button>
+          <button class="button text-button" id="clear-calc" type="button"><svg class="icon"><use href="#icon-reset"/></svg><span data-i18n="clear">Limpar e começar de novo</span></button>
+        </form>
+      </div>
+      <div id="traditional-panel" class="instrument traditional" role="tabpanel" aria-labelledby="mode-classic" tabindex="0" hidden>
+        <div class="instrument-top"><span class="instrument-name"><svg class="icon" aria-hidden="true"><use href="#icon-calc"/></svg><span data-i18n="traditionalInstrument">CALCULADORA / TRADICIONAL</span></span><span class="indicator" aria-hidden="true"></span></div>
+        <div id="traditional-screen" class="result-screen" role="status" aria-live="polite" aria-atomic="true"><span class="screen-label" data-i18n="result">RESULTADO</span><span id="traditional-expression" class="expression"></span><output id="traditional-result" class="result-number">0</output><span id="traditional-status" class="screen-caption"></span></div>
+        <div class="keypad" role="group" data-i18n-aria-label="keypadLabel" aria-label="Teclado da calculadora">
+          <button class="key utility" type="button" data-key="clear" data-i18n-aria-label="clearAll" aria-label="Limpar tudo">C</button><button class="key utility" type="button" data-key="sign" data-i18n-aria-label="toggleSign" aria-label="Trocar sinal">±</button><button class="key utility" type="button" data-key="backspace" data-i18n-aria-label="backspace" aria-label="Apagar último caractere">⌫</button><button class="key operator" type="button" data-key="divide" data-i18n-aria-label="divide" aria-label="Dividir">÷</button>
+          <button class="key" type="button" data-key="7">7</button><button class="key" type="button" data-key="8">8</button><button class="key" type="button" data-key="9">9</button><button class="key operator" type="button" data-key="multiply" data-i18n-aria-label="multiply" aria-label="Multiplicar">×</button>
+          <button class="key" type="button" data-key="4">4</button><button class="key" type="button" data-key="5">5</button><button class="key" type="button" data-key="6">6</button><button class="key operator" type="button" data-key="subtract" data-i18n-aria-label="subtract" aria-label="Subtrair">−</button>
+          <button class="key" type="button" data-key="1">1</button><button class="key" type="button" data-key="2">2</button><button class="key" type="button" data-key="3">3</button><button class="key operator" type="button" data-key="add" data-i18n-aria-label="add" aria-label="Somar">+</button>
+          <button class="key zero-key" type="button" data-key="0">0</button><button class="key" type="button" data-key="decimal" data-i18n-aria-label="decimalLabel" aria-label="Separador decimal"><span id="decimal-key">,</span></button><button class="key equals-key" type="button" data-key="equals" data-i18n-aria-label="equalsLabel" aria-label="Calcular resultado">=</button>
+        </div><p class="keyboard-note" data-i18n="keyboardNote">Teclado: Enter = · Esc limpa · F9 troca o sinal. Enter em um botão aciona esse botão.</p>
+      </div>
+      <details class="calculator-rules"><summary data-i18n="calculatorRulesTitle">Uma calculadora, sem surpresas.</summary><div><p data-i18n="sequentialRule">No modo tradicional, as operações seguem da esquerda para a direita: 10 + 5 × 2 = 30.</p><p data-i18n="repeatRule">Trocar o operador antes do próximo número substitui a operação. Repetir = reaplica a última operação e seu segundo número. Exemplo: 5 + 2 = 7; = 9.</p><p data-i18n="editingRule">Depois de um resultado, um número inicia outro cálculo; um operador continua a conta. C limpa tudo. ⌫ apaga a entrada; após um resultado, começa em zero. Se faltar o segundo número, = repete o primeiro.</p><p data-i18n="precisionRule">Entradas de até 15 dígitos. Resultados com até 15 algarismos significativos; valores muito grandes ou pequenos usam notação científica.</p></div></details>
+      </div>
+    </section>
+
+    <section id="adivinhacao" class="page workspace game-workspace" aria-labelledby="game-title" hidden>
+      <div class="workspace-intro">
+        <a class="back-link" href="#inicio"><span aria-hidden="true">←</span><span data-i18n="backHome">Voltar ao início</span></a>
+        <p class="eyebrow"><span class="project-number">02 /</span><span data-i18n="gameTag">INTUIÇÃO &amp; ESTRATÉGIA</span></p>
+        <h1 id="game-title" tabindex="-1" data-i18n="navGame">Adivinhação</h1>
+        <p class="intro-description" data-i18n="gameIntro">A resposta está escondida.<br>As pistas estão com você.</p>
+        <details class="instructions" open><summary class="small-heading" data-i18n="theRules">AS REGRAS DO JOGO</summary><ol><li data-i18n="gameStep1">Escolha o tamanho do desafio.</li><li data-i18n="gameStep2">Você tem 10 tentativas para acertar.</li><li data-i18n="gameStep3">Use as dicas para chegar mais perto.</li></ol></details>
+        <p class="quiet-note" data-i18n="gameNote">Palpites repetidos contam. Entradas inválidas, não.</p>
+      </div>
+      <div class="instrument game-instrument">
+        <div class="instrument-top"><span class="instrument-name"><svg class="icon"><use href="#icon-target"/></svg><span data-i18n="gameInstrument">DESAFIO DO NÚMERO</span></span><span class="indicator" aria-hidden="true"></span></div>
+        <div class="game-display"><div class="target-symbol" aria-hidden="true"><svg><use href="#icon-target"/></svg></div><span class="screen-label" data-i18n="secretNumber">NÚMERO SECRETO</span><span id="secret-display" class="secret-number" aria-hidden="true">?</span><p id="game-range" class="screen-caption"></p></div>
+        <form id="setup-form">
+          <fieldset class="difficulty-fieldset"><legend data-i18n="chooseDifficulty">Qual é o seu desafio?</legend><div class="difficulties">
+            <label class="difficulty-option"><input type="radio" name="difficulty" value="100" checked><span><i class="difficulty-bars" aria-hidden="true"><b></b><b></b><b></b></i><strong data-i18n="easy">Fácil</strong><small>1 — 100</small></span></label>
+            <label class="difficulty-option"><input type="radio" name="difficulty" value="500"><span><i class="difficulty-bars level-two" aria-hidden="true"><b></b><b></b><b></b></i><strong data-i18n="medium">Médio</strong><small>1 — 500</small></span></label>
+            <label class="difficulty-option"><input type="radio" name="difficulty" value="1000"><span><i class="difficulty-bars level-three" aria-hidden="true"><b></b><b></b><b></b></i><strong data-i18n="hard">Difícil</strong><small>1 — 1000</small></span></label>
+          </div></fieldset>
+          <button class="button primary" type="submit"><span data-i18n="startGame">Começar desafio</span><svg class="icon"><use href="#icon-arrow"/></svg></button>
+        </form>
+        <div id="active-game" hidden>
+          <div class="attempts-row"><span data-i18n="remaining">Tentativas restantes</span><strong id="attempt-count">10 / 10</strong></div>
+          <div id="attempt-progress" class="attempt-progress" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0" aria-label="Tentativas usadas" data-i18n-aria-label="attemptsUsed"></div>
+          <form id="guess-form" novalidate><div class="field"><label for="guess" data-i18n="yourGuess">Seu palpite</label><div class="guess-entry"><input id="guess" type="text" inputmode="numeric" autocomplete="off" maxlength="100" aria-describedby="guess-help guess-error" placeholder="?" required><button class="button primary" id="guess-submit" type="submit"><span data-i18n="sendGuess">Enviar palpite</span><svg class="icon"><use href="#icon-arrow"/></svg></button></div><small id="guess-help" class="input-help"></small><span id="guess-error" class="field-error" role="alert"></span></div></form>
+        </div>
+        <div id="game-feedback" class="game-feedback" role="status" aria-live="polite" aria-atomic="true"><span id="feedback-icon" class="feedback-icon" aria-hidden="true">↗</span><p id="feedback-text"></p></div>
+        <button class="button primary" id="play-again" type="button" hidden><svg class="icon"><use href="#icon-reset"/></svg><span data-i18n="playAgain">Jogar novamente</span></button>
+      </div>
+    </section>
+    <noscript><p class="noscript-note">Ative o JavaScript para usar os projetos. / Enable JavaScript to use the projects.</p></noscript>
+  </main>
+
+  <footer class="footer"><div><span class="footer-mark" aria-hidden="true">d:</span><p><span data-i18n="footerBy">Um projeto de</span> <strong>Michel Fiquene</strong></p></div><a href="https://github.com/michel-fiquene1/Calculadora-e-Jogo-de-Adivinhacao-Python" target="_blank" rel="noopener noreferrer"><span data-i18n="source">Explore o código</span><svg class="icon"><use href="#icon-code"/></svg><span class="sr-only" data-i18n="newTab">(abre em nova aba)</span></a></footer>
+</body>
+</html>
