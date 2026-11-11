@@ -101,7 +101,11 @@ Os programas utilizam apenas a biblioteca padrão do Python. O nome e o conteúd
 │       ├── tradicional.js     # Máquina de estados e teclado
 │       └── adivinhacao.js     # Regras e interface do jogo
 ├── scripts/serve.mjs          # Prévia HTTP local
+├── scripts/build.mjs          # Pacote web com lista explícita de arquivos
 ├── tests/rules.test.mjs       # Testes das regras e traduções
+├── tests/build.test.mjs       # Isolamento do pacote e política de segurança
+├── netlify.toml               # Build e diretório de publicação
+├── _headers                   # Cabeçalhos HTTP da aplicação
 ├── calculadora.chat.py       # Original de terminal
 ├── jogo.de.advinhação.py      # Original de terminal
 └── .gitignore
@@ -112,7 +116,7 @@ Os programas utilizam apenas a biblioteca padrão do Python. O nome e o conteúd
 Execute os testes automatizados com o próprio Node.js:
 
 ```sh
-node --test tests/rules.test.mjs
+node --test tests/rules.test.mjs tests/build.test.mjs
 ```
 
 Os testes cobrem operações, validações, precisão e encadeamento da calculadora tradicional, limites das dificuldades, tentativas, dicas, vitória na última tentativa, derrota e consistência das traduções. A revisão da interface verifica os fluxos no navegador, teclado, idiomas, responsividade e controle de efeitos. Capturas, relatórios locais, logs e caches ficam fora do versionamento.
@@ -121,9 +125,28 @@ O jogo é uma demonstração executada no navegador: seu estado pode ser inspeci
 
 ## Hospedagem
 
-A versão pública da aplicação será disponibilizada futuramente. **A hospedagem ainda não foi configurada**, e não há link de demonstração publicado.
+Aplicação pública: **https://duolab-calculadora-e-jogo.netlify.app/**.
 
-A aplicação é estática, utiliza caminhos relativos e não precisa de build. Os arquivos `index.html` e `assets/` estão preparados para uma futura hospedagem estática; os scripts locais não executam deploy.
+A aplicação continua estática, sem dependências de execução. O build apenas copia os oito recursos web autorizados e o arquivo de cabeçalhos para `dist/`, sem transformar HTML, CSS ou JavaScript:
+
+```sh
+node scripts/build.mjs
+node scripts/serve.mjs --dist
+```
+
+A prévia do pacote usa http://127.0.0.1:4173/ e os mesmos cabeçalhos de segurança. `dist/` é uma pasta gerada e pode ser substituída pelo próximo build; não coloque arquivos de trabalho nela. A lista de publicação está em `scripts/build.mjs`. Novos recursos precisam ser incluídos explicitamente nessa lista e na lista do servidor local.
+
+O projeto Netlify existente acompanha a branch `main` deste repositório. `netlify.toml` define o comando `node scripts/build.mjs`, Node.js 24 e o diretório `dist`. Ao publicar manualmente no mesmo projeto, envie somente `dist/`. Os comandos de build e prévia acima não fazem deploy.
+
+Python, testes, servidor local, documentação, logs e capturas não entram no pacote web. Os programas originais e as ferramentas permanecem no repositório. Não há redirecionamento genérico para `index.html`: a navegação usa fragmentos (`#calculadora`, por exemplo), e arquivos inexistentes devem retornar 404.
+
+### Segurança e integração Netlify
+
+O arquivo `_headers` é copiado para a distribuição e interpretado pelo Netlify. Ele mantém a CSP restritiva da página e acrescenta proteção contra incorporação por outros sites, bloqueio de iframes, `nosniff`, política sem envio de referência e bloqueio de câmera, microfone, geolocalização, pagamentos e USB. A aplicação não utiliza essas capacidades. Não são usados `unsafe-inline` ou `unsafe-eval`; a CSP em HTML permanece como proteção adicional.
+
+O selo **Powered by Netlify** é inserido pela hospedagem, não pelo código do DuoLab. Ele deve ficar desligado no projeto existente em **Project configuration → General → Powered by Netlify badge**. A configuração é por projeto e independente do deploy automático. Sua remoção evita conteúdo promocional e controles invisíveis causados pela incompatibilidade do selo com a CSP. Não use CSS para ocultá-lo nem JavaScript para remover seu iframe. Consulte a [documentação oficial do selo](https://docs.netlify.com/manage/projects/powered-by-netlify-badge/) e dos [cabeçalhos HTTP](https://docs.netlify.com/manage/routing/headers/).
+
+**Pendência da hospedagem:** em 11/11/2026, a API autenticada recusou desligar o selo com a resposta `422 — Removing the Netlify badge is not available on this plan`. O plano atual foi mantido. A configuração de publicação não remove o selo nem elimina essa restrição: a CSP permanece ativa e pode registrar o bloqueio do componente no console. A remoção oficial depende de disponibilidade no plano ou de uma solução oferecida pelo Netlify.
 
 ## Autor
 

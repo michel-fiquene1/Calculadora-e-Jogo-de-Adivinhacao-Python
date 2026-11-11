@@ -18,3 +18,5 @@ coverage/
 .coverage
 *.log
 *.tmp
+dist/
+.netlify/
